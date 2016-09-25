@@ -12,7 +12,7 @@ class Users_model extends CI_Model{
     private $email;
     private $password;
 
-    private static $table = 'users';
+    private $table = 'users';
 
     public function __construct(){
         parent::__construct();
@@ -22,8 +22,7 @@ class Users_model extends CI_Model{
     }
 
     public function insert(){
-        $query = 'INSERT INTO `users` SET `name` = ?, `email` = ?, `password_hash` = ?;';
-        if($this->db->query($query, array($this->username, $this->email, $this->password))){
+        if($this->db->insert($this->table, array($this->username, $this->email, $this->password))){
             return true;
         }else{
             return false;
