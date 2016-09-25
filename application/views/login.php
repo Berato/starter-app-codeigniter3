@@ -16,6 +16,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <body>
         <h1>Login</h1>
+        <?php
+            if($error != null){
+                echo $error;
+            }
+        ?>
         <form method="post" action="/">
             <label for="username">Username</label><br>
             <input type="text" name="username" placeholder="Enter Your Username"><br>
