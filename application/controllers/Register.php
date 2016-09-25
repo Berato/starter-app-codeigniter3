@@ -8,6 +8,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Register extends CI_Controller {
 
+    public function __construct(){
+        parent::__construct();
+
+        $this->load->library('session');
+        $this->load->model('users_model', 'user');
+    }
+
     public function index(){
         $data = array(); // CONTENT FOR THE VIEW
 
@@ -21,6 +28,17 @@ class Register extends CI_Controller {
             $data['error'] = validation_errors();
         }else{
             $data['error'] = null;
+
+            $userData = array();
+            $userData['username'] =         $this->input->post('username');
+            $userData['email'] =            $this->input->post('email');
+            $userData['password'] =         $this->input->post('password');
+            $userData['passwordRepeat'] =   $this->input->post('passwordRepeat');
+
+            $this->user->setData($userData);
+            if($this->user->insert() == false){
+                $data['error'] = "We can't register this user";
+            }
         }
 
         $this->load->view('register', $data);
