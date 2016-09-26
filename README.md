@@ -32,6 +32,14 @@ Create table
     UNIQUE KEY `email` (`email`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+## Requeriments
+
+**PHP v5.6** or newer is recommended.
+
+It should work on 5.3.7 as well, but we strongly advise you NOT to run
+such old versions of PHP, because of potential security and performance
+issues, as well as missing features. 
+
 ## Cloning the repository
 
 If you have [Git](https://git-scm.com/) insalled, you can open your command line and type
