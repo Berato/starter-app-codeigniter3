@@ -79,6 +79,13 @@ class Users_model extends CI_Model{
         $this->setPassword($data['password'], $data['passwordRepeat']);
     }
 
+    public function isLogged(){
+        if(!isset($_SESSION['loggedin'])){
+            return $_SESSION['loggedin'];
+        }
+        return false;
+    }
+
     /**
      * @return mixed
      */
