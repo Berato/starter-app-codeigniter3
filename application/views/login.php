@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <body>
         <h1>Login</h1>
         <?php
-            if($error != null){
+            if(isset($error) != null){
                 echo $error;
             }
         ?>
@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <input type="text" name="username" placeholder="Enter Your Username"><br>
 
             <label for="password">Password</label><br>
-            <input type="text" name="password" placeholder="Enter Your Password"><br>
+            <input type="password" name="password" placeholder="Enter Your Password"><br>
 
             <button type="submit">Sign in</button>
         </form>

@@ -22,16 +22,17 @@ class Users_model extends CI_Model{
 
         $this->load->database();
         $this->load->helper('security');
+        $this->load->library('session');
     }
 
     public function insert(){
         $this->db->select("*");
         $this->db->from($this->table);
-        $this->db->where('email', $this->email);
+        $this->db->where('email', $this->getEmail());
         if($this->db->get()->num_rows() == 0){
             $this->db->select("*");
             $this->db->from($this->table);
-            $this->db->where('name', $this->username);
+            $this->db->where('name', $this->getUsername());
             if($this->db->get()->num_rows() == 0){
                 if($this->db->insert($this->table, array('name' => $this->username, 'email' => $this->email, 'password_hash' => $this->password))){
                     // Success message
@@ -50,6 +51,28 @@ class Users_model extends CI_Model{
         }
     }
 
+    public function doLogin(){
+        $this->db->select("*");
+        $this->db->from($this->table);
+        $this->db->where('name', $this->getUsername());
+        $result = $this->db->get();
+        if($result->num_rows() == 1){
+            $user = $result->result_array()[0];
+
+            if($user['password_hash'] == $this->password){
+                $this->session->name = $user['name'];
+                $this->session->email = $user['email'];
+                $this->session->loggedin = true;
+            }
+        }
+    }
+    public function doLogout(){
+        $this->session->name = null;
+        $this->session->email = null;
+        $this->session->loggedin = false;
+
+        $this->session->sess_destroy();
+    }
     public function setData($data){
         $this->setUsername($data['username']);
         $this->setEmail($data['email']);

@@ -12,21 +12,41 @@ class Login extends CI_Controller {
         parent::__construct();
 
         $this->load->library('session');
+        $this->load->model('users_model', 'user');
+        $this->load->library('session');
+        $this->load->helper('url');
     }
 
     public function index(){
 	    $data = array(); // CONTENT FOR THE VIEW
 
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        if(!isset($_SESSION['loggedin'])){
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('username', 'Username', 'trim|required');
+            $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
-        if($this->form_validation->run() == false){
-            $data['error'] = validation_errors();
+            if($this->form_validation->run() == false){
+                $data['error'] = validation_errors();
+            }else{
+                $this->user->setUsername($this->input->post('username'));
+                $this->user->setPassword($this->input->post('password'), $this->input->post('password'));
+
+                $this->user->doLogin();
+
+                $data['error'] = null;
+                redirect('/');
+            }
+
+            $this->load->view('login', $data);
         }else{
-            $data['error'] = null;
-        }
+            $data['username'] = $this->session->name;
+            $data['email'] = $this->session->email;
 
-		$this->load->view('login', $data);
-	}
+            $this->load->view('home', $data);
+        }
+    }
+    public function logout(){
+        $this->user->doLogout();
+        redirect('/');
+    }
 }
