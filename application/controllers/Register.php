@@ -27,8 +27,6 @@ class Register extends CI_Controller {
         if($this->form_validation->run() == false){
             $data['error'] = validation_errors();
         }else{
-            $data['error'] = null;
-
             $userData = array();
             $userData['username'] =         $this->input->post('username');
             $userData['email'] =            $this->input->post('email');
@@ -36,9 +34,10 @@ class Register extends CI_Controller {
             $userData['passwordRepeat'] =   $this->input->post('passwordRepeat');
 
             $this->user->setData($userData);
-            if($this->user->insert() == false){
-                $data['error'] = "We can't register this user";
-            }
+            $this->user->insert();
+
+            $data['error'] = $this->user->getErrors();
+            $data['info']  = $this->user->getInfo();
         }
 
         $this->load->view('register', $data);

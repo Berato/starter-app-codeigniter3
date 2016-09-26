@@ -14,6 +14,9 @@ class Users_model extends CI_Model{
 
     private $table = 'users';
 
+    private $errors = array();
+    private $info = array();
+
     public function __construct(){
         parent::__construct();
 
@@ -22,10 +25,28 @@ class Users_model extends CI_Model{
     }
 
     public function insert(){
-        if($this->db->insert($this->table, array($this->username, $this->email, $this->password))){
-            return true;
+        $this->db->select("*");
+        $this->db->from($this->table);
+        $this->db->where('email', $this->email);
+        if($this->db->get()->num_rows() == 0){
+            $this->db->select("*");
+            $this->db->from($this->table);
+            $this->db->where('name', $this->username);
+            if($this->db->get()->num_rows() == 0){
+                if($this->db->insert($this->table, array('name' => $this->username, 'email' => $this->email, 'password_hash' => $this->password))){
+                    // Success message
+                    $this->info[] = "You were registred with success.";
+                }else{
+                    // Database error
+                    $this->errors[] = "Database Error";
+                }
+            }else{
+                // Already have this username
+                $this->errors[] = "Username already registered";
+            }
         }else{
-            return false;
+            // Already have this email
+            $this->errors[] = "Email already registered";
         }
     }
 
@@ -38,40 +59,36 @@ class Users_model extends CI_Model{
     /**
      * @return mixed
      */
-    public function getUsername()
-    {
+    public function getUsername(){
         return $this->username;
     }
 
     /**
      * @param mixed $username
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username){
         $this->username = $username;
     }
 
     /**
      * @return mixed
      */
-    public function getEmail()
-    {
+    public function getEmail(){
         return $this->email;
     }
 
     /**
      * @param mixed $email
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email){
         $this->email = $email;
     }
 
     /**
      * @param mixed $password
      */
-    public function setPassword($password, $passowrdRepeat){
-        if($password == $passowrdRepeat){
+    public function setPassword($password, $passwordRepeat){
+        if($password == $passwordRepeat){
             $this->password = do_hash($password);
         }
     }
@@ -83,6 +100,34 @@ class Users_model extends CI_Model{
                 'passwordRepeat'    => $this->password,
                 'email'             => $this->email
             );
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrors(){
+        $string = "";
+        foreach ($this->errors as $error){
+            $string .= "<p>".$error."</p>\n";
+        }
+        if($string == ""){
+            return null;
+        }
+        return $string;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInfo(){
+        $string = "";
+        foreach ($this->info as $info){
+            $string .= "<p>".$info."</p>\n";
+        }
+        if($string == ""){
+            return null;
+        }
+        return $string;
     }
 
 }
