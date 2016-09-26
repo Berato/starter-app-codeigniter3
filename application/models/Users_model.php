@@ -36,18 +36,18 @@ class Users_model extends CI_Model{
             if($this->db->get()->num_rows() == 0){
                 if($this->db->insert($this->table, array('name' => $this->username, 'email' => $this->email, 'password_hash' => $this->password))){
                     // Success message
-                    $this->info[] = "You were registred with success.";
+                    $this->info[]   = "You were registred with success.";
                 }else{
                     // Database error
                     $this->errors[] = "Database Error";
                 }
             }else{
                 // Already have this username
-                $this->errors[] = "Username already registered";
+                $this->errors[]     = "Username already registered";
             }
         }else{
             // Already have this email
-            $this->errors[] = "Email already registered";
+            $this->errors[]         = "Email already registered";
         }
     }
 
@@ -56,6 +56,7 @@ class Users_model extends CI_Model{
         $this->db->from($this->table);
         $this->db->where('name', $this->getUsername());
         $result = $this->db->get();
+        
         if($result->num_rows() == 1){
             $user = $result->result_array()[0];
 
@@ -63,7 +64,11 @@ class Users_model extends CI_Model{
                 $_SESSION['name']       = $user['name'];
                 $_SESSION['email']      = $user['email'];
                 $_SESSION['loggedin']   = true;
+            }else{
+                $this->errors[] = "Wrong password";
             }
+        }else{
+            $this->errors[] = "User do not exists";
         }
     }
     public function doLogout(){
@@ -120,6 +125,8 @@ class Users_model extends CI_Model{
     public function setPassword($password, $passwordRepeat){
         if($password == $passwordRepeat){
             $this->password = do_hash($password);
+        }else{
+            $this->errors[] = "Password don't match";
         }
     }
 

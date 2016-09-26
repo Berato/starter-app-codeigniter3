@@ -17,10 +17,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <body>
         <h1>Register</h1>
         <?php
-            if(isset($error) != null){
+            if(isset($error) && $error != null){
                 echo $error;
             }
-            if(isset($info) != null){
+            if(isset($info) && $error != null){
                 echo $info;
             }
         ?>

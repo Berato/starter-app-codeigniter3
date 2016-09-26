@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <body>
         <h1>Login</h1>
         <?php
-            if(isset($error) != null){
+            if(isset($error) && $error != null){
                 echo $error;
             }
         ?>

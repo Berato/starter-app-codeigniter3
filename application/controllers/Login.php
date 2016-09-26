@@ -28,13 +28,18 @@ class Login extends CI_Controller {
             if($this->form_validation->run() == false){
                 $data['error'] = validation_errors();
             }else{
+                $data['error'] = null;
                 $this->user->setUsername($this->input->post('username'));
                 $this->user->setPassword($this->input->post('password'), $this->input->post('password'));
 
                 $this->user->doLogin();
 
-                $data['error'] = null;
-                redirect('/');
+                $data['error'] = $this->user->getErrors();
+                $data['info']  = $this->user->getInfo();
+
+                if($data['error'] == null){
+                    redirect('/');
+                }
             }
 
             $this->load->view('login', $data);
