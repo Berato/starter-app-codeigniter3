@@ -20,7 +20,7 @@ class Login extends CI_Controller {
     public function index(){
 	    $data = array(); // CONTENT FOR THE VIEW
 
-        if($this->user->isLogged()){
+        if(!$this->user->isLogged()){
             $this->load->library('form_validation');
             $this->form_validation->set_rules('username', 'Username', 'trim|required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');

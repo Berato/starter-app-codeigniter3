@@ -60,16 +60,16 @@ class Users_model extends CI_Model{
             $user = $result->result_array()[0];
 
             if($user['password_hash'] == $this->password){
-                $this->session->name = $user['name'];
-                $this->session->email = $user['email'];
-                $this->session->loggedin = true;
+                $_SESSION['name']       = $user['name'];
+                $_SESSION['email']      = $user['email'];
+                $_SESSION['loggedin']   = true;
             }
         }
     }
     public function doLogout(){
-        $this->session->name = null;
-        $this->session->email = null;
-        $this->session->loggedin = false;
+        $_SESSION['name']       = null;
+        $_SESSION['email']      = null;
+        $_SESSION['loggedin']   = false;
 
         $this->session->sess_destroy();
     }
@@ -80,8 +80,8 @@ class Users_model extends CI_Model{
     }
 
     public function isLogged(){
-        if(!isset($_SESSION['loggedin'])){
-            return $_SESSION['loggedin'];
+        if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+            return true;
         }
         return false;
     }
