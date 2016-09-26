@@ -7,13 +7,12 @@ This project was made for quick start a CodeIgniter aplication, it contains:
  * A login part
  
 ## How to start
-
-You need to download CodeIgniter 3.1.0 in the CodeIgniter's [website](http://codeigniter.com) and clone this repository.
-
- * Unzip the CodeIgniter folder
- * Copy the *system* CodeIgniter's diretory to the Starter App diretory
- * Config the `application/config/database.php` file
- * And make the queries below in your database
+ * You need to download [CodeIgniter 3.1.0](https://www.codeigniter.com/download).
+ * [Clone](https://github.com/1fabiosoares/starter-app-codeigniter3#cloning-the-repository) this repository.
+ * Unzip the CodeIgniter folder.
+ * Copy the *system* CodeIgniter's diretory to the Starter App diretory.
+ * Config the `application/config/database.php` file.
+ * And make the queries below in your database.
 
 ## Database
 
@@ -35,8 +34,7 @@ Create table
 
 ## Cloning the repository
 
-You can open your command line and type
-   
+If you have [Git](https://git-scm.com/) insalled, you can open your command line and type
    
     git clone https://github.com/1fabiosoares/starter-app-codeigniter3.git
     
