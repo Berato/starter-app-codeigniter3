@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </head>
 
     <body>
-        <h1>Well come <?php if(isset($username)){echo $username;} ?>.</h1>
+        <h1>Well come <strong><?php if(isset($username)){echo $username;} ?></strong>.</h1>
         You are logged in. Now you can <a href="/logout">logout</a>.
     </body>
 </html>
