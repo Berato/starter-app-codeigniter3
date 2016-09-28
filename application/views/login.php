@@ -12,24 +12,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <meta charset="utf-8">
         <title>Login</title>
         <meta name="viewport" content="width=device-width">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="http://milligram.github.io/bower_components/normalize.css/normalize.css">
+        <!-- Milligram CSS minified -->
+        <link rel="stylesheet" href="http://milligram.github.io/bower_components/milligram/dist/milligram.min.css">
     </head>
 
     <body>
-        <h1>Login</h1>
-        <?php
-            if(isset($error) && $error != null){
-                echo $error;
-            }
-        ?>
-        <form method="post" action="/">
-            <label for="username">Username</label><br>
-            <input type="text" name="username" placeholder="Enter Your Username"><br>
+        <main class="row">
+            <aside class="column">&nbsp;</aside>
+            <section class="column">
+                <h1>Login</h1>
+                <?php
+                if(isset($error) && $error != null){
+                    echo $error;
+                }
+                ?>
+                <form method="post" action="/" class="clearfix">
+                    <fieldset>
+                        <label for="username">Username</label>
+                        <input type="text" name="username" placeholder="Enter Your Username">
 
-            <label for="password">Password</label><br>
-            <input type="password" name="password" placeholder="Enter Your Password"><br>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" placeholder="Enter Your Password">
 
-            <button type="submit">Sign in</button>
-        </form>
-        If your doesn't have a accout, please <a href="/register">register</a>.
+                        <button type="submit" class="button float-right">Sign in</button>
+                        If your doesn't have a accout, please <a href="/register">register</a>.
+                    </fieldset>
+                </form>
+            </section>
+            <aside class="column">&nbsp;</aside>
+        </main>
     </body>
 </html>

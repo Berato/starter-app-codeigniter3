@@ -11,9 +11,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <meta charset="utf-8">
         <title>Logged in</title>
         <meta name="viewport" content="width=device-width">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="http://milligram.github.io/bower_components/normalize.css/normalize.css">
+        <!-- Milligram CSS minified -->
+        <link rel="stylesheet" href="http://milligram.github.io/bower_components/milligram/dist/milligram.min.css">
+        <style>
+            *{
+                text-align: center;
+            }
+        </style>
     </head>
 
     <body>
-        Well come <?php if(isset($username)){echo $username;} ?>. You are logged in. Now you can <a href="/logout">logout</a>.
+        <h1>Well come <?php if(isset($username)){echo $username;} ?>.</h1>
+        You are logged in. Now you can <a href="/logout">logout</a>.
     </body>
 </html>
