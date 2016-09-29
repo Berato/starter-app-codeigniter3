@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Time: 16:56
  */
 class Users_model extends CI_Model{
-
+    private $id;
     private $username;
     private $email;
     private $password;
@@ -61,6 +61,7 @@ class Users_model extends CI_Model{
             $user = $result->result_array()[0];
 
             if($user['password_hash'] == $this->password){
+                $_SESSION['id']         = $user['id'];
                 $_SESSION['name']       = $user['name'];
                 $_SESSION['email']      = $user['email'];
                 $_SESSION['loggedin']   = true;

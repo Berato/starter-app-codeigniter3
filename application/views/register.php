@@ -35,16 +35,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <form method="post" action="/register" class="clearfix">
             <fieldset>
                 <label for="username">Username</label>
-                <input type="text" name="username" placeholder="Enter Your Username">
+                <input type="text" name="username" placeholder="Enter your Username">
 
                 <label for="email">Email</label>
-                <input type="email" name="email" placeholder="Enter Your Email">
+                <input type="email" name="email" placeholder="Enter your Email">
 
                 <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Enter Your Password">
+                <input type="password" name="password" placeholder="Enter your Password">
 
                 <label for="passwordRepeat">Password Repeat</label>
-                <input type="password" name="passwordRepeat" placeholder="Repeat Your Password">
+                <input type="password" name="passwordRepeat" placeholder="Repeat your Password">
 
                 <button type="submit" class="button float-right">Register</button>
                 If you already have a account, please <a href="/login">login</a>.

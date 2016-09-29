@@ -11,7 +11,6 @@ class Login extends CI_Controller {
     public function __construct(){
         parent::__construct();
 
-        $this->load->library('session');
         $this->load->model('users_model', 'user');
         $this->load->library('session');
         $this->load->helper('url');
@@ -19,6 +18,8 @@ class Login extends CI_Controller {
 
     public function index(){
 	    $data = array(); // CONTENT FOR THE VIEW
+        $data['error'] = null;
+        $data['info']  = null;
 
         if(!$this->user->isLogged()){
             $this->load->library('form_validation');
@@ -28,7 +29,7 @@ class Login extends CI_Controller {
             if($this->form_validation->run() == false){
                 $data['error'] = validation_errors();
             }else{
-                $data['error'] = null;
+
                 $this->user->setUsername($this->input->post('username'));
                 $this->user->setPassword($this->input->post('password'), $this->input->post('password'));
 
