@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Logged in</title>
+        <title><?php if(isset($username)){echo $username;} ?></title>
         <meta name="viewport" content="width=device-width">
         <!-- Google Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
