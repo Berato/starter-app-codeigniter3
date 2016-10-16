@@ -39,7 +39,7 @@ class Login extends CI_Controller {
                 $data['info']  = $this->user->getInfo();
 
                 if($data['error'] == null){
-                    redirect('/');
+                    redirect(base_url("login"));
                 }
             }
 

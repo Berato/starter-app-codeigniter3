@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     echo $error;
                 }
                 ?>
-                <form method="post" action="/" class="clearfix">
+                <form method="post" action="<?=base_url('login')?>" class="clearfix">
                     <fieldset>
                         <label for="username">Username</label>
                         <input type="text" name="username" placeholder="Enter Your Username">
